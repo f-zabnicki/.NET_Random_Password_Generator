@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsolePasswordGenerator
 {
-    static class DataReciver
+    public static class DataReciver
     {
         public static PasswordDetails GetDataFromUser()
         {
@@ -18,13 +18,21 @@ namespace ConsolePasswordGenerator
             return new PasswordDetails(lenght, symbols, numbers, lowerCase, upperCase);
 
         }
-        private static int GetLenght()
+        public static uint GetLenght()
         {
             Console.WriteLine("How long should the password be?");
-            int output;
+            uint output;
             try
             {
-                output = Int32.Parse(Console.ReadLine());
+                output = UInt32.Parse(Console.ReadLine());
+                if (output == 0)
+                {
+                    throw new FormatException("Cannot make password of lenght == 0");
+                }
+            }
+            catch (ArgumentException)
+            {
+                throw new ArgumentException("Cannot convert input value.");
             }
             catch (Exception)
             {

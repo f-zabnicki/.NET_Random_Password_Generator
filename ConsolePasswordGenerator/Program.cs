@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace ConsolePasswordGenerator
 {
@@ -6,8 +7,11 @@ namespace ConsolePasswordGenerator
     {
         static void Main(string[] args)
         {
+            Version version = Assembly.GetEntryAssembly().GetName().Version;
+            Console.WriteLine($"ver.{version}");
             PasswordDetails conditions = DataReciver.GetDataFromUser();
             Console.WriteLine(PasswordGenerator.GeneratePassword(conditions));
+            Console.ReadLine();
         }
     }
 }
